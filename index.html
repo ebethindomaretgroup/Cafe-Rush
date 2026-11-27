@@ -351,8 +351,10 @@ function finish(q,tout,silent){
 function endAll(){
  if(!S.run)return;S.run=false;clearInterval(gt);clearTimeout(gapT);bgmStop();
  if(cur&&!cur.done)finish(Math.min(.3,cur.part()*.3),true,true);
- sfx.win();$("#arena").classList.remove("dark");buildReceipt();go("s4");
+ sfx.win();$("#arena").classList.remove("dark");buildReceipt();go("s4");sendDone(Math.round(S.prog));
 }
+/* SCORM SIGNAL: layar hasil (tombol "Mainkan Ulang") tampil -> misi selesai */
+function sendDone(nilai){try{if(window.parent&&window.parent!==window)window.parent.postMessage({jenis:'GAME_SELESAI',nilai:nilai},'*')}catch(e){}}
 
 /* ---------- RECEIPT ---------- */
 let recapTxt="";
